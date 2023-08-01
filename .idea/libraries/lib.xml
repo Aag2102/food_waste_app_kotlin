@@ -1,0 +1,64 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/trove4j.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/js.engines.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-reflect-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/sam-with-receiver-compiler-plugin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-script-runtime.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-stdlib-jdk7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-runner.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-test-junit5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/annotations-13.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-compiler.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/assignment-compiler-plugin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-stdlib-js.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/parcelize-compiler.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-imports-dumper-compiler-plugin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-annotations-jvm-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-scripting-jvm.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-scripting-common.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-annotation-processing-cli.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/jvm-abi-gen.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-daemon.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-scripting-compiler.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-scripting-compiler-impl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-main-kts.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/android-extensions-runtime.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-test-junit-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-test-testng-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlinx-serialization-compiler-plugin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-stdlib-jdk8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-stdlib-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-test-junit5-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-test.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-script-runtime-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/mutability-annotations-compat.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-ant.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-stdlib-jdk7-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlinx-coroutines-core-jvm.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/lombok-compiler-plugin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-stdlib-js-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-stdlib-jdk8-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-annotations-jvm.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-annotation-processing-runtime.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-serialization-compiler-plugin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-test-junit.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-test-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-test-testng.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-daemon-client.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-test-js-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/parcelize-runtime.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/android-extensions-compiler.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-annotation-processing.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-stdlib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-preloader.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/noarg-compiler-plugin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-test-js.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/kotlin-reflect.jar!/" />
+      <root url="jar://$PROJECT_DIR$/food_waste_app_kotlin/wastewarrior/node_modules/kotlin-compiler/lib/allopen-compiler-plugin.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
