@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="wastewarrior-jvm-1.0-SNAPSHOT">
+    <output-path>$PROJECT_DIR$/build/libs</output-path>
+    <root id="archive" name="wastewarrior-jvm-1.0-SNAPSHOT.jar">
+      <element id="module-output" name="wastewarrior.jvmMain" />
+    </root>
+  </artifact>
+</component>
