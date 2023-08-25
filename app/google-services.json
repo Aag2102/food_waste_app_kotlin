@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "586542374637",
+    "project_id": "goodapp-764aa",
+    "storage_bucket": "goodapp-764aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586542374637:android:898c61ad985e59b1c7f6e4",
+        "android_client_info": {
+          "package_name": "com.example.goodapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "586542374637-7lplimntq6lcps4i64cgchs54pnvtna1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBD9oz-JoLTRig482js0VCkxN2iVX91Z_M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "586542374637-7lplimntq6lcps4i64cgchs54pnvtna1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
