@@ -26,15 +26,21 @@ class AddSurpriseBagActivity : AppCompatActivity() {
             val price = binding.editSurpriseBagPrice.text.toString().toDouble()
 
             // Create a new SurpriseBag object with user inputs
-            val newSurpriseBag = SurpriseBag(
-                name = name,
-                quantity = quantity,
-                isFavourite = false,
-                price = price
-            )
+            val newSurpriseBag = FirebaseAuth.getInstance().currentUser?.let { it1 ->
+                SurpriseBag(
+                    it1.uid,
+                    name = name,
+                    quantity = quantity,
+                    isFavourite = false,
+                    price = price,
+                    category = "xgjx"
+                )
+            }
 
             // Perform actions to add the new surprise bag to Firestore
-            addSurpriseBagToFirestore(newSurpriseBag)
+            if (newSurpriseBag != null) {
+                addSurpriseBagToFirestore(newSurpriseBag)
+            }
         }
     }
 

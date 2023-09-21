@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.wastewarrior.LandingPageActivity
+import com.example.wastewarrior.R
 import com.example.wastewarrior.RegisterActivity
 import com.example.wastewarrior.databinding.FragmentNotificationsBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -32,6 +34,16 @@ class NotificationsFragment : Fragment() {
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        binding.accountInfo.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_notifications_to_accountInfoFragment)
+        }
+        binding.payment.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_notifications_to_paymentFragment)
+        }
+
+        binding.orders.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_notifications_to_ordersFragment)
+        }
         binding.logout.setOnClickListener{
             FirebaseAuth.getInstance().signOut()
             context?.startActivity(Intent(context,LandingPageActivity::class.java))

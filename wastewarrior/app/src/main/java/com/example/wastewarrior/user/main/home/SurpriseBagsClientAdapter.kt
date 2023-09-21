@@ -1,44 +1,49 @@
 package com.example.wastewarrior.user.main.home
 
 import android.content.Context
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat.startActivity
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wastewarrior.R
-import com.example.wastewarrior.admin.SurpriseBagsActivity
 import com.example.wastewarrior.models.SurpriseBag
-import com.example.wastewarrior.user.MainActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 
-class SurpriseBagsClientAdapter(private val surpriseBags: List<SurpriseBag>) :
-    RecyclerView.Adapter<SurpriseBagsClientAdapter.SurpriseBagViewHolder>() {
+class SurpriseBagsClientAdapter(
+    private val surpriseBags: List<SurpriseBag>,
+) : RecyclerView.Adapter<SurpriseBagsClientAdapter.SurpriseBagViewHolder>() {
+
     private val db = FirebaseFirestore.getInstance()
+
     inner class SurpriseBagViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(surpriseBag: SurpriseBag) {
             val itemNameTextView = itemView.findViewById<TextView>(R.id.itemName)
             val itemQuantityTextView = itemView.findViewById<TextView>(R.id.itemQuantity)
             val itemPriceTextView = itemView.findViewById<TextView>(R.id.itemPrice)
+
             itemView.findViewById<CardView>(R.id.orderCard).setOnClickListener {
-                //updateSurpriseBagByName(surpriseBag,itemView.context)
-                addOrderToFirestore(surpriseBag,itemView.context)
-                addOrderToFirestore(surpriseBag,itemView.context)
+                addOrderToRestaurantFirestore(surpriseBag, itemView.context)
             }
 
             itemView.findViewById<ImageView>(R.id.imageView4).setOnClickListener {
-                addFariteToFirestore(surpriseBag,itemView.context)
+                val userDocumentRef =
+                    FirebaseAuth.getInstance().currentUser?.let { it1 ->
+                        db.collection("users").document(
+                            it1.uid)
+                    }
+                if (userDocumentRef != null) {
+                    addFavoriteToFirestore(itemView,surpriseBag, itemView.context)
+                }
             }
+
             itemNameTextView.text = surpriseBag.name
-            itemQuantityTextView.text = surpriseBag.quantity.toString()+" left"
+            itemQuantityTextView.text = "${surpriseBag.quantity} left"
             itemPriceTextView.text = "£${surpriseBag.price}"
         }
     }
@@ -55,132 +60,97 @@ class SurpriseBagsClientAdapter(private val surpriseBags: List<SurpriseBag>) :
 
     override fun getItemCount(): Int = surpriseBags.size
 
-    private fun updateSurpriseBagByName(updatedSurpriseBag: SurpriseBag,context:Context) {
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
+    private fun addOrderToRestaurantFirestore(surpriseBag: SurpriseBag, context: Context) {
+        val ordersCollectionRef = db.collection("restaurants")
+            .document(surpriseBag.restaurant) // Use the provided restaurantId
 
-        userId?.let {
-            val restaurantRef = db.collection("restaurants").document(it)
+        // Retrieve the existing orders list and update it
+        ordersCollectionRef.collection("orders").add(
+            hashMapOf(
+                "user_id" to FirebaseAuth.getInstance().currentUser?.uid, // Use the provided userId
+                "order_details" to surpriseBag.toHashMap()
+            )
+        ).addOnSuccessListener { documentReference ->
+            showToast("Order added successfully", context)
+        }.addOnFailureListener { exception ->
+            showToast("Failed to add order: ${exception.message}", context)
+        }
+    }
 
-            // Retrieve the existing surprises list and update the specific surprise bag by name
+    private fun addFavoriteToFirestore(itemView: View, surpriseBag: SurpriseBag, context: Context) {
+        val restaurantRef =
+            FirebaseAuth.getInstance().currentUser?.uid?.let { db.collection("users").document(it) }
+
+        // Retrieve the existing favorites list and update it
+        if (restaurantRef != null) {
             restaurantRef.get().addOnSuccessListener { documentSnapshot ->
                 if (documentSnapshot.exists()) {
-                    val surprises = documentSnapshot.get("surprises") as MutableList<HashMap<String, Any>>?
-                    surprises?.let {
-                        // Find the index of the surprise bag to be updated based on its name
-                        val current:SurpriseBag?=null
-                        val indexToUpdate = it.indexOfFirst { surprise ->
-                            surprise["name"] == updatedSurpriseBag.name
-                        }
+                    addFavoriteToExistingUserDocument(itemView,restaurantRef, surpriseBag, context)
 
-                        if (indexToUpdate != -1) {
-                            val currentQuantity = it[indexToUpdate]["quantity"] as Long
-                            it[indexToUpdate]["quantity"] = currentQuantity - 1
-
-                            val current=it
-                            restaurantRef.update("surprises", it)
-                                .addOnSuccessListener {
-                                    showToast("Surprise bag updated successfully",context)
-                                    addOrderToFirestore(updatedSurpriseBag,context)
-                                    addOrderToRestaurantFirestore(updatedSurpriseBag,context)
-                                    val intent = Intent(context, MainActivity::class.java)
-                                    context.startActivity(intent)
-                                }
-                                .addOnFailureListener { exception ->
-                                    showToast("Failed to update surprise bag",context)
-                                }
-                        } else {
-                            showToast("Surprise bag not found",context)
-                        }
-                    }
                 } else {
-                    showToast("Restaurant document not found",context)
+                    createAndAddFavoriteToUserDocument(itemView,restaurantRef, surpriseBag, context)
                 }
             }.addOnFailureListener { exception ->
-                showToast("Error: ${exception.message}",context)
+                showToast("Error: ${exception.message}", context)
             }
         }
     }
 
-    private fun showToast(message: String,context: Context) {
+
+    private fun addFavoriteToExistingUserDocument(
+        itemView: View,
+        userDocumentRef: DocumentReference,
+        surpriseBag: SurpriseBag,
+        context: Context
+    ) {
+        // Retrieve the existing favorites list and update it
+        userDocumentRef.get().addOnSuccessListener { documentSnapshot ->
+            if (documentSnapshot.exists()) {
+                val favorites = documentSnapshot.get("favorites") as MutableList<HashMap<String, Any>>?
+                favorites?.add(surpriseBag.toHashMap())
+                favorites?.let {
+                    userDocumentRef.update("favorites", it)
+                        .addOnSuccessListener {
+                            showToast("Added to favorites", context)
+                            itemView.findNavController().navigate(R.id.action_navigation_home_to_favouritesFragment)
+                        }
+                        .addOnFailureListener { exception ->
+                            showToast("Failed to add to favorites: ${exception.message}", context)
+                        }
+                }
+            } else {
+                showToast("User document not found", context)
+            }
+        }.addOnFailureListener { exception ->
+            showToast("Error: ${exception.message}", context)
+        }
+    }
+
+    private fun createAndAddFavoriteToUserDocument(
+        itemView: View,
+        userDocumentRef: DocumentReference,
+        surpriseBag: SurpriseBag,
+        context: Context
+    ) {
+        // Create a data map with initial data, including the favorite
+        val initialData = hashMapOf(
+            "favorites" to mutableListOf(surpriseBag.toHashMap())
+            // You can add other initial fields here if needed
+        )
+
+        // Set the data on the user document using merge option to create it if not found
+        userDocumentRef.set(initialData, SetOptions.merge())
+            .addOnSuccessListener {
+                showToast("User document created and favorite added", context)
+                itemView.findNavController().navigate(R.id.action_navigation_home_to_favouritesFragment)
+
+            }
+            .addOnFailureListener { exception ->
+                showToast("Failed to create user document: ${exception.message}", context)
+            }
+    }
+
+    private fun showToast(message: String, context: Context) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
-    private fun addOrderToFirestore(surpriseBag: SurpriseBag,context: Context) {
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
-
-        userId?.let {
-            val restaurantRef = db.collection("users").document(it)
-
-            // Retrieve the existing surprises list and update it
-
-            restaurantRef.get().addOnSuccessListener { documentSnapshot ->
-                if (documentSnapshot.exists()) {
-                    val surprises = documentSnapshot.get("orders") as MutableList<HashMap<String, Any>>?
-                    surprises?.add(surpriseBag.toHashMap())
-                    surprises?.let {
-                        restaurantRef.update("surprises", it)
-                            .addOnSuccessListener {
-                            }
-                            .addOnFailureListener { exception ->
-                            }
-                    }
-                } else {
-                }
-            }.addOnFailureListener { exception ->
-                showToast("Error: ${exception.message}",context)
-            }
-        }
-    }
-
-    private fun addFariteToFirestore(surpriseBag: SurpriseBag,context: Context) {
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
-
-        userId?.let {
-            val restaurantRef = db.collection("users").document(it)
-
-            // Retrieve the existing surprises list and update it
-
-            restaurantRef.get().addOnSuccessListener { documentSnapshot ->
-                if (documentSnapshot.exists()) {
-                    val surprises = documentSnapshot.get("farites") as MutableList<HashMap<String, Any>>?
-                    surprises?.add(surpriseBag.toHashMap())
-                    surprises?.let {
-                        restaurantRef.update("farites", it)
-                            .addOnSuccessListener {
-                            }
-                            .addOnFailureListener { exception ->
-                            }
-                    }
-                } else {
-                }
-            }.addOnFailureListener { exception ->
-                showToast("Error: ${exception.message}",context)
-            }
-        }
-    }
-    private fun addOrderToRestaurantFirestore(surpriseBag: SurpriseBag,context: Context) {
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
-
-        userId?.let {
-            val restaurantRef = db.collection("restaurants").document(it)
-
-            // Retrieve the existing surprises list and update it
-            restaurantRef.get().addOnSuccessListener { documentSnapshot ->
-                if (documentSnapshot.exists()) {
-                    val surprises = documentSnapshot.get("orders") as MutableList<HashMap<String, Any>>?
-                    surprises?.add(surpriseBag.toHashMap())
-                    surprises?.let {
-                        restaurantRef.update("surprises", it)
-                            .addOnSuccessListener {
-                            }
-                            .addOnFailureListener { exception ->
-                            }
-                    }
-                } else {
-                }
-            }.addOnFailureListener { exception ->
-                showToast("Error: ${exception.message}",context)
-            }
-        }
-    }
-
 }

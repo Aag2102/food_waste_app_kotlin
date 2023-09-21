@@ -12,11 +12,11 @@
         android:title="Discover" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/favouritesFragment"
         android:icon="@drawable/heart_svgrepo_com"
         android:title="Favourites" />
     <item
-        android:id="@+id/navigation_notifications2"
+        android:id="@+id/navigation_notifications"
         android:icon="@drawable/baseline_account_box_24"
         android:title="Profile" />
 

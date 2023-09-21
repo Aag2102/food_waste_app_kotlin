@@ -2,7 +2,6 @@ package com.example.wastewarrior.user.main.dashboard
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -64,11 +63,11 @@ class DashboardFragment : Fragment(), OnMapReadyCallback {
                         val quantity = (surprise["quantity"] as Long).toInt()
                         val isFavourite = surprise["isFavourite"] as Boolean
                         val price = surprise["price"] as Double
-                        SurpriseBag(surpriseName, quantity, isFavourite, price)
+                        SurpriseBag(document.id,surpriseName, quantity, isFavourite, price, "kli")
                     } ?: emptyList()
 
                     // Create a Restaurant object with the fetched data
-                    val restaurant = Restaurant(name, address, surpriseBags)
+                    val restaurant = Restaurant(document.id,name, address, surpriseBags)
                     restaurantList.add(restaurant)
                 }
 
@@ -90,6 +89,7 @@ class DashboardFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
+        println(message = "Init /////////////////////")
         mMap = googleMap
 
         // Clear any existing markers
@@ -99,6 +99,7 @@ class DashboardFragment : Fragment(), OnMapReadyCallback {
         val canvas = Canvas(bitmap)
         drawable.setBounds(0, 0, canvas.width, canvas.height)
         drawable.draw(canvas)
+        println(message = "Marker set ///////////////")
         for (restaurant in restaurantList) {
             val restaurantLatLng = LatLng(restaurant.address["latitude"] as Double,
                 restaurant.address["longitude"] as Double
@@ -111,6 +112,7 @@ class DashboardFragment : Fragment(), OnMapReadyCallback {
                 .snippet("Address: ${restaurant.address}") // Customize this
                 .icon(BitmapDescriptorFactory.fromBitmap(bitmap)) // Customize the marker icon
 
+            println(message = "Markers added /////////////")
             mMap.addMarker(markerOptions)
         }
 
@@ -125,6 +127,7 @@ class DashboardFragment : Fragment(), OnMapReadyCallback {
         val cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 100)
         mMap.moveCamera(cameraUpdate)
 
+        println(message = "Bounds set ///////////////")
         mMap.setOnMarkerClickListener { marker ->
             marker.showInfoWindow()
             true

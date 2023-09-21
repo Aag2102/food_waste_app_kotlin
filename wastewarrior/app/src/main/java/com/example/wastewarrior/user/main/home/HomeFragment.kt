@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wastewarrior.databinding.FragmentHomeBinding
 import com.example.wastewarrior.models.Restaurant
 import com.example.wastewarrior.models.SurpriseBag
@@ -51,13 +50,14 @@ class HomeFragment : Fragment() {
                         val quantity = (surprise["quantity"] as Long).toInt()
                         val isFavourite = surprise["isFavourite"] as Boolean
                         val price = surprise["price"] as Double
-                        SurpriseBag(surpriseName, quantity, isFavourite, price)
+                        SurpriseBag(document.id,surpriseName, quantity, isFavourite, price, "hjkl")
                     } ?: emptyList()
 
                     // Create a Restaurant object with the fetched data
-                    val restaurant = Restaurant(name, address, surpriseBags)
+                    val restaurant = Restaurant(document.id,name, address, surpriseBags)
                     restaurantList.add(restaurant)
                 }
+                
                 restaurantAdapter = RestaurantAdapter(restaurantList)
                 binding.recyclerView.adapter = restaurantAdapter
                 Log.i("rest",restaurantList.toString())
