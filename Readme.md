@@ -1,70 +1,62 @@
+# Wastewarrior Android Application
 
-# WasteWarrior: A Food Waste Management Android App
+## Project Overview
 
-WasteWarrior is an innovative Android application designed to empower users to manage and minimize food waste. Built primarily with Kotlin, it offers features to track food inventory, report waste, access educational resources, and engage in a community forum.
-
-![WasteWarrior App Screenshot](./images/wastewarrior.png) _Screenshot of the WasteWarrior application_
+Wastewarrior is an Android application aimed at reducing food waste by connecting users with restaurants that offer 'surprise bags' of food that would otherwise go to waste.
 
 ## Features
 
-### Food Inventory Management
-- Track your food stocks and expiration dates.
-- Receive notifications for food nearing its expiration date.
+- Explore restaurants on Google Maps
+- View and purchase 'surprise bags' from different restaurants
+- Manage your favorite restaurants
+- Access settings and notifications
 
-### Waste Tracking/Reporting
-- Log and track food waste over time.
-- Visualize waste statistics through user-friendly charts in the app.
+## Prerequisites
 
-### Educational Resources
-- Access tips and advice on reducing food waste within the app.
-- Explore articles, infographics, and videos.
+- Android Studio
+- Kotlin
+- Google Maps API Key
 
-### Community Forum
-- Share tips, tricks, and success stories.
-- Engage with a community of waste-conscious individuals.
+## How to Run
 
-## Technologies Used
-- **Primary Language**: Kotlin
-- **IDE**: Android Studio
+1. Clone the repository:
+    ```
+    git clone https://github.com/Aag2102/food_waste_app_kotlin
+    ```
+2. Open Android Studio and import the `food_waste_app_kotlin/wastewarrior` directory.
+3. Place your Google Maps API key in the `res/values/strings.xml` file.
+4. Build and run the app on an emulator or an Android device.
 
-## Installation
+## Directory Structure
 
-Follow these instructions to set up the WasteWarrior app on your system:
+```
+wastewarrior/
+│
+├── models/  # Data classes that represent different entities
+│
+├── user/
+│   ├── main/
+│   │   ├── dashboard/
+│   │   │   ├── DashboardFragment  # Explore page showing restaurants on Google Maps
+│   │   │   ├── DashboardViewModel  # (Not in use currently)
+│   │   │   └── FavouritesAdapter   # RecyclerView adapter for user favorites
+│   │   │
+│   │   ├── home/
+│   │   │   ├── HomeFragment       # List of all surprise bags from restaurants
+│   │   │   └── HomeViewModel      # (Not in use currently)
+│   │   │
+│   │   └── notifications/
+│   │       ├── NotificationsFragment  # Settings page
+│   │       └── NotificationsViewModel # (Not in use currently)
+│   │
+│   ├── RestaurantAdapter            # RecyclerView adapter for restaurants
+│   ├── SurpriseBagesClientAdapter   # RecyclerView adapter for surprise bags
+│   ├── LoginActivity                # User login functionality
+│   └── MainActivity                 # App's main entry point, bottom navigation
+│
+└── ... (Other directories and files)
+```
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/Aag2102/food_waste_app_kotlin.git
-   ```
+## Contributing
 
-#### Open in Android Studio
-
-- Launch Android Studio and choose `Open an existing Android Studio project`.
-- Navigate to the cloned `food_waste_app_kotlin` directory and select it.
-
-#### Sync and Build the Project
-
-- Once the project is loaded, click on `Sync Project with Gradle Files` to fetch the necessary dependencies.
-- Build the project by clicking on `Build` → `Make Project`.
-
-#### Run the App:
-
-- Choose a target device (emulator or physical device).
-- Click on the green play button to run the app.
-
-#### Contributing
-
-- We welcome contributions to the WasteWarrior project! Please read our CONTRIBUTING.md file to learn how you can get involved.
-
-#### Privacy Policy & Terms of Service
-
-- Please review our Privacy Policy and Terms of Service available within the app to understand how we handle user data.
-
-#### License
-
-- WasteWarrior is licensed under the MIT License.
-
-#### Contact
-
-- For questions or feedback, please reach out to your-email@example.com.
-
-**Built with ❤️ by the WasteWarrior Team using Kotlin in Android Studio.**
+Feel free to open issues and pull requests!
